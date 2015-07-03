@@ -5,6 +5,7 @@ html
     link rel="stylesheet" href="/css/com.css"
   body
     h1
-      | CSS Snowfrakes
-    form action="/falling" method="POST"
-      input type="text" name="url"
+      | CSS Snowfrakes falling on 
+      = @url
+    = @uri.class
+    /= @body.inner_text
