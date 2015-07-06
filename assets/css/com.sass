@@ -2,6 +2,68 @@
 @import "compass/reset"
 
 body
-  background: #EEE
+  width: 100%
+  height: 100%
+  background: #CCC
   font-size: 100%
   line-height: 140%
+  color: #FFF
+  font-family: 'Montserrat', sans-serif
+  +background-image(radial-gradient(#DDD 0, #999 100%))
+
+::-webkit-input-placeholder
+  color: #CCC
+::-moz-placeholder
+  color: #CCC
+::-ms-input-placeholder
+  color: #CCC
+::placeholder
+  color: #CCC
+
+form
+  display: block
+  position: fixed
+  left: 50%
+  top: 50%
+  width: 300px
+  height: 300px
+  margin: -150px
+  text-align: left
+.form-inner
+  display: table-cell
+  width: 300px
+  height: 300px
+  text-align: left
+  vertical-align: middle
+label
+  margin-right: 0.5em
+input
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  width: 100%
+  padding: 0.5em
+  border: 0
+  background: rgba(255,255,255,0.8)
+  border-radius: 4px
+  font-size: 1.125rem
+  line-height: 140%
+  font-family: 'Montserrat', sans-serif
+  font-weight: bold
+
+.snowfrake
+  display: inline-block
+  position: absolute
+  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", serif
+  color: #FFF
+  text-shadow: 0 0 0 #FFF, 0 0 0 #FFF, 0 0 0 #FFF, 0 0 0 #FFF
+.title
+  margin: 0.5em
+  font-style: 1.125rem
+  line-height: 140%
+  color: #EEE
+.url
+  text-transform: uppercase
+  font-weight: bold
+  color: #FFF
+  letter-spacing: 1px

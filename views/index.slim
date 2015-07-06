@@ -1,10 +1,14 @@
 html
   head
     title
-      | CSS Snowfrakes
+      | CSSnowfrakes
+    link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'
     link rel="stylesheet" href="/css/com.css"
   body
-    h1
-      | CSS Snowfrakes
+    h1.title
+      | CSSnowfrakes
     form action="/falling" method="POST"
-      input type="text" name="url"
+      .form-inner
+        label for="form-url"
+          | URL
+        input#form-url type="text" name="url" placeholder="http://"

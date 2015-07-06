@@ -1,0 +1,13 @@
+{
+  "name": "middleman-template-grunt",
+  "version": "0.1.0",
+  "devDependencies": {
+    "extend": "^2.0.1",
+    "grunt": "~0.4.1",
+    "grunt-browserify": "^3.8.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "jquery": "^2.1.4",
+    "matchdep": "~0.1.1",
+    "q": "^1.4.1"
+  }
+}

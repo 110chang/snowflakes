@@ -1,8 +1,9 @@
 require 'uri'
+require 'cgi'
 require 'active_support'
 require 'active_support/core_ext'
 require 'sinatra'
-#require 'sinatra/reloader' if development?
+require 'sinatra/reloader' if development?
 require 'compass'
 require 'mechanize'
 require 'net/https'
@@ -51,7 +52,9 @@ post '/falling' do
 
   http = Net::HTTP.new(@uri.host, @uri.port)
   responce = http.post(@uri.path, @uri.query, {'Content-type'=>'application/x-www-form-urlencoded'})
-  logger.info(responce.body);
+  @json = Hash.from_xml(responce.body).to_json
+  #@json = CGI.unescapeHTML(@json)
+  logger.info(@json.encoding);
   #@doc = @mec.page.search('body').remove('script')
   slim :falling#, escape_html: true
 end
@@ -65,3 +68,4 @@ end
 after do
   cache_control :no_cache
 end
+
