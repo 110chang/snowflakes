@@ -9,9 +9,22 @@ form action="/falling" method="POST"
     span.form-msg data-bind="visible: onceValidated"
       span.form-msg-err data-bind="ifnot: urlValid"
         | Invalid URL
-      span.form-msg-ok data-bind="if: urlValid"
+      span.form-msg-err data-bind="ifnot: apiSuccess"
+        | API Error
+      span.form-msg-ok data-bind="if: urlValid() && apiSuccess()"
         | OK
-    input#form-url type="text" name="url" placeholder="http://" data-bind="value: url, valueUpdate: 'afterkeydown'"
-    button.form-submit type="submit"
-      | GO
+    .form-submit-wrapper
+      input#form-url type="text" name="url" placeholder="http://" data-bind="value: url, valueUpdate: 'afterkeydown'"
+      /! ko if: !inAction() && !apiLoading()
+      button.form-submit type="submit" data-bind="enable: urlValid, visible: !inAction() && !apiLoading()"
+        i.fa.fa-play
+      /! /ko
+      /! ko if: inAction() && !apiLoading()
+      a.form-stop href="javascript:void(0);" data-bind="visible: inAction && !apiLoading()"
+        i.fa.fa-stop
+      /! /ko
+      /! ko if: apiLoading
+      span.form-spinner
+        i.fa.fa-circle-o-notch.fa-spin
+      /! /ko
 

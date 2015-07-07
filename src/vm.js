@@ -9,23 +9,25 @@ var extend = require('extend');
 var REG_URL = /(https?):\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=#]*)?/;
 
 function VM() {
-  this.url = ko.observable('http://');
+  this.url = ko.observable('http://google.co.jp');
   this.url.subscribe(function(val) {
-    console.log(val);
     this.onceValidated(true);
   }, this);
 
   this.onceValidated = ko.observable(false);
 
   this.urlValid = ko.computed(function() {
-
-    console.log(!REG_URL.test(this.url()));
     return REG_URL.test(this.url());
   }, this);
+
+  this.apiSuccess = ko.observable(true);
+  this.inAction = ko.observable(false);
+  this.apiLoading = ko.observable(false);
 
   ko.applyBindings(this);
 
   this.validate = function() {
+    this.onceValidated(true);
     return this.urlValid();
   };
 }

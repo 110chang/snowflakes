@@ -35,10 +35,25 @@ var centerX = window.innerWidth / 2;
 var centerY = window.innerHeight / 2;
 var maxFontSize = Math.floor(Math.min(centerX, centerY) / 5);
 var words;
+var vm;
+
+function shadow(size, opacity) {
+  return '0 0 ' + size + 'px rgba(255,255,255,' + opacity + ')';
+}
+var s = '0 0 0 #FFF';
+var g = '0 0 20px #FFF';
+var blurFxStart = [shadow(10,0), shadow(12,0), shadow(14,0), shadow(16,0)].join();
+var blurFxEnd = [shadow(10,1), shadow(12,1), shadow(14,1), shadow(16,1)].join();
+
+//if ('ontouchstart' in window) {
+  blurFxStart = s;
+  blurFxEnd = g;
+//}
+console.log(blurFxStart);
 
 function animate($el) {
-  var r = Math.floor(Math.random() * 90);
-  var ro = Math.floor(Math.random() * 90) - 45;
+  var r = Math.floor(Math.random() * 60) - 30;
+  var ro = Math.floor(Math.random() * 60) - 30;
   var dur = Math.floor(Math.random() * 2000) + 3000;
   var offsetX = Math.floor(Math.random() * centerX) - centerX / 2;
   var offsetY = Math.floor(Math.random() * centerY) - centerY / 2;
@@ -49,30 +64,43 @@ function animate($el) {
   }
 
   $el.css({
-    'left': centerX + offsetX,
-    'top': centerY + offsetY,
+    //'left': centerX + offsetX,
+    //'top': centerY + offsetY,
     'margin': (-$el.height() / 2) + ' ' + (-$el.width() / 2),
-    'font-size': fontSize + 'px',
+    'font-size': '12px',
     'line-height': '120%',
-    'transform': {
-      'rotate': r
-    },
+    'transform': 
+      'translate(' + (centerX + offsetX) + 'px, ' + (centerY + offsetY) + 'px) rotate(' + r + 'deg) scale(' + Math.floor(maxFontSize / 12) + ')',
+    'text-shadow': blurFxStart,
+    'color': 'rgba(255,255,255,1)'
   });
 
   $el.CSS3Animate({
-    'left': centerX,
-    'top': centerY,
-    'font-size': 12,
+    //'left': centerX,
+    //'top': centerY,
+    //'font-size': 12,
     'transform': {
-      'rotate': r + ro
+      'translateX': centerX + offsetX / 10,
+      'translateY': centerY + offsetY / 10,
+      'rotate': r + ro,
+      'scale': 1
     },
-    'text-shadow': '0 0 10px #FFF, 0 0 12px #FFF, 0 0 14px #FFF, 0 0 16px #FFF',
-    'opacity': 0
-  }, dur, 'easeOutQuad');
+    'text-shadow': blurFxEnd,
+    'color': 'rgba(255,255,255,0)'
+    //'opacity': 0
+  }, dur, 'easeOutQuad', function() {
+    $el.remove();
+  });
+}
+
+function clear() {
+  words = [];
+  $('.snowfrake').remove();
 }
 
 function loop() {
   if (!words[count]) {
+    vm.inAction(false);
     return;
   }
   var $el = $('<span/>').text(words[count].surface);
@@ -89,24 +117,51 @@ function loop() {
   }, timeout);
 }
 
+function onAPISuccess(xhr, status) {
+  console.log('onAPISuccess');
+  //console.log(JSON.parse(xhr.responseText));
+  var json = JSON.parse(JSON.parse(xhr.responseText));
+
+  words = json.ResultSet.ma_result.word_list.word;
+  vm.apiSuccess(true);
+  vm.apiLoading(false);
+  vm.inAction(true);
+  loop();
+}
+
+function onAPIError(xhr, status, error) {
+  console.log('%s,%s,%s', xhr, status, error);
+  vm.apiLoading(false);
+  vm.apiSuccess(false);
+}
+
 $(function() {
   console.log('DOM ready.');
   //console.log(window.words.ResultSet.ma_result.word_list.word);
-  var vm = new VM();
+  vm = new VM();
 
   $('form').on('submit', function(e) {
     e.preventDefault();
-    console.log(vm.validate());
     if (vm.validate()) {
       //this.submit();
+      console.log(vm.url());
+      vm.apiLoading(true);
+      $.ajax({
+        type: 'POST',
+        url: '/falling',
+        data: {
+          url: vm.url()
+        },
+        complete: onAPISuccess,
+        error: onAPIError
+      });
     }
     return false;
   });
-  
-  if (!window.words) {
-    return;
-  }
-  words = window.words.ResultSet.ma_result.word_list.word;
-  loop();
+
+  $('.form-submit-wrapper').on('click', '.form-stop', function(e) {
+    console.log('clear');
+    clear();
+  });
 });
 

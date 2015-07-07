@@ -25,6 +25,7 @@ form
   position: fixed
   left: 50%
   top: 50%
+  z-index: 9999
   width: 300px
   height: 300px
   margin: -150px
@@ -43,7 +44,7 @@ input
   -moz-appearance: none
   appearance: none
   width: 100%
-  padding: 0.5em
+  padding: 0.5em 3em 0.5em 0.5em
   border: 0
   background: rgba(255,255,255,0.8)
   border-radius: 4px
@@ -55,6 +56,7 @@ input
 .form-msg
   display: inline-block
   font-size: 0.75rem
+  line-height: 100%
   vertical-align: middle
 .form-msg-err
   display: inline-block
@@ -62,21 +64,62 @@ input
 .form-msg-ok
   display: inline-block
   color: #3C9
+.form-submit-wrapper
+  position: relative
 .form-submit
   -webkit-appearance: none
   -moz-appearance: none
   appearance: none
+  position: absolute
+  right: 0.5em
+  bottom: 0.5em
   display: inline-block
-  width: 300px
-  margin-top: 0.25em
+  width: auto
+  padding: 0.3em 0.5em
   border: 0
-  background: #999
+  background: #3C9
   border-radius: 4px
   font-size: 1rem
   line-height: 140%
   color: #FFF
   font-family: 'Montserrat', sans-serif
   letter-spacing: 1px
+  cursor: pointer
+.form-submit[disabled]
+  background: #DDD
+  color: #EEE
+.form-stop
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  position: absolute
+  right: 0.5em
+  bottom: 0.5em
+  display: inline-block
+  width: auto
+  padding: 0.3em 0.5em
+  border: 0
+  background: #F66
+  border-radius: 4px
+  font-size: 1rem
+  line-height: 140%
+  color: #FFF
+  font-family: 'Montserrat', sans-serif
+  letter-spacing: 1px
+  cursor: pointer
+.form-stop[disabled]
+  background: #DDD
+  color: #EEE
+.form-spinner
+  position: absolute
+  right: 0.5em
+  bottom: 0.5em
+  display: inline-block
+  width: auto
+  padding: 0.3em 0.5em
+  font-size: 1rem
+  line-height: 140%
+  color: #3C9
 
 .snowfrake
   display: inline-block
@@ -94,3 +137,14 @@ input
   font-weight: bold
   color: #FFF
   letter-spacing: 1px
+
+@media screen and (max-width:767px)
+  .snowfrake
+    display: inline-block
+    position: absolute
+    font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", serif
+    color: #FFF
+    text-shadow: 0 0 0 #FFF
+
+
+//
