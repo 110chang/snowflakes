@@ -58,7 +58,8 @@ post '/falling' do
   #@json = CGI.unescapeHTML(@json)
   logger.info(@json.encoding);
   #@doc = @mec.page.search('body').remove('script')
-  slim :falling#, escape_html: true
+  #slim :falling#, escape_html: true
+  json @json
 end
 
 get '/css/*.css' do

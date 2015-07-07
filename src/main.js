@@ -1,7 +1,11 @@
-//main.js
+
+/*
+ * main.js
+ **/
 
 var $ = require('jquery');
 var $anim = require('./jquery.css3animate');
+var VM = require('./vm');
 
 /*
 Object
@@ -23,6 +27,7 @@ Object
     xmlns:xsi: "http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation: "urn:yahoo:jp:jlp http://jlp.yahooapis.jp/MAService/V1/parseResponse.xsd"
 */
+
 
 var timer;
 var count = 0;
@@ -87,6 +92,20 @@ function loop() {
 $(function() {
   console.log('DOM ready.');
   //console.log(window.words.ResultSet.ma_result.word_list.word);
+  var vm = new VM();
+
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    console.log(vm.validate());
+    if (vm.validate()) {
+      //this.submit();
+    }
+    return false;
+  });
+  
+  if (!window.words) {
+    return;
+  }
   words = window.words.ResultSet.ma_result.word_list.word;
   loop();
 });
