@@ -65,12 +65,13 @@ function animate($el) {
     'opacity': 0
   }, dur, 'easeOutQuad');
 }
+
 function loop() {
   if (!words[count]) {
     return;
   }
   var $el = $('<span/>').text(words[count].surface);
-  var timeout = Math.floor(Math.random() * 4500) + 500;
+  var timeout = Math.floor(Math.random() * 500) + 500;
 
   $('body').append($el.addClass('snowfrake'));
   animate($el);
@@ -89,3 +90,4 @@ $(function() {
   words = window.words.ResultSet.ma_result.word_list.word;
   loop();
 });
+

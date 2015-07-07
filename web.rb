@@ -11,6 +11,8 @@ require 'net/https'
 api_base = 'http://jlp.yahooapis.jp/MAService/V1/parse?'
 app_id = 'dj0zaiZpPUFoaE04WmcyRW1NaSZzPWNvbnN1bWVyc2VjcmV0Jng9Njg-'
 
+set :bind, '0.0.0.0'
+
 configure do
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
