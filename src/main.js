@@ -95,7 +95,7 @@ function animate($el) {
 
 function clear() {
   words = [];
-  $('.snowfrake').remove();
+  $('.snowflake').remove();
 }
 
 function loop() {
@@ -106,7 +106,7 @@ function loop() {
   var $el = $('<span/>').text(words[count].surface);
   var timeout = Math.floor(Math.random() * 500) + 500;
 
-  $('body').append($el.addClass('snowfrake'));
+  $('body').append($el.addClass('snowflake'));
   animate($el);
 
   timer = setTimeout(function() {
