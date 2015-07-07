@@ -1,5 +1,4 @@
 require 'uri'
-require 'cgi'
 require 'active_support'
 require 'active_support/core_ext'
 require 'sinatra'
