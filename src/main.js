@@ -72,7 +72,7 @@ function animate($el) {
     'transform': 
       'translate(' + (centerX + offsetX) + 'px, ' + (centerY + offsetY) + 'px) rotate(' + r + 'deg) scale(' + Math.floor(maxFontSize / 12) + ')',
     'text-shadow': blurFxStart,
-    'color': 'rgba(255,255,255,1)'
+    //'color': 'rgba(255,255,255,0)'
   });
 
   $el.CSS3Animate({
@@ -86,7 +86,7 @@ function animate($el) {
       'scale': 1
     },
     'text-shadow': blurFxEnd,
-    'color': 'rgba(255,255,255,0)'
+    //'color': 'rgba(255,255,255,0)'
     //'opacity': 0
   }, dur, 'easeOutQuad', function() {
     $el.remove();

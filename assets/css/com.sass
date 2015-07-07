@@ -27,13 +27,13 @@ form
   top: 50%
   z-index: 9999
   width: 300px
-  height: 300px
+  height: 360px
   margin: -150px
   text-align: left
 .form-inner
   display: table-cell
   width: 300px
-  height: 300px
+  height: 360px
   text-align: left
   vertical-align: middle
 label
@@ -125,8 +125,7 @@ input
   display: inline-block
   position: absolute
   font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", serif
-  color: #FFF
-  text-shadow: 0 0 0 #FFF, 0 0 0 #FFF, 0 0 0 #FFF, 0 0 0 #FFF
+  color: transparent//#FFF
 .title
   margin: 0.5em
   font-style: 1.125rem
@@ -139,12 +138,7 @@ input
   letter-spacing: 1px
 
 @media screen and (max-width:767px)
-  .snowfrake
-    display: inline-block
-    position: absolute
-    font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", serif
-    color: #FFF
-    text-shadow: 0 0 0 #FFF
-
+  .form-inner
+    vertical-align: bottom
 
 //
