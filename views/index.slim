@@ -1,16 +1,30 @@
-html
-  head
-    meta charset="utf-8"
-    meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0"
-    title
-      | CSSnowfrakes
-    link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'
-    link rel="stylesheet" href="/css/com.css"
-  body
-    h1.title
-      | CSSnowfrakes
-    form action="/falling" method="POST"
-      .form-inner
-        label for="form-url"
-          | URL
-        input#form-url type="text" name="url" placeholder="http://"
+/
+/ Index
+/
+
+form action="/falling" method="POST"
+  .form-inner
+    label for="form-url"
+      | URL
+    span.form-msg data-bind="visible: onceValidated"
+      span.form-msg-err data-bind="ifnot: urlValid"
+        | Invalid URL
+      span.form-msg-err data-bind="ifnot: apiSuccess"
+        | API Error
+      span.form-msg-ok data-bind="if: urlValid() && apiSuccess()"
+        | OK
+    .form-submit-wrapper
+      input#form-url type="text" name="url" placeholder="http://" data-bind="value: url, valueUpdate: 'afterkeydown'"
+      /! ko if: !inAction() && !apiLoading()
+      button.form-submit type="submit" data-bind="enable: urlValid, visible: !inAction() && !apiLoading()"
+        i.fa.fa-play
+      /! /ko
+      /! ko if: inAction() && !apiLoading()
+      a.form-stop href="javascript:void(0);" data-bind="visible: inAction && !apiLoading()"
+        i.fa.fa-stop
+      /! /ko
+      /! ko if: apiLoading
+      span.form-spinner
+        i.fa.fa-circle-o-notch.fa-spin
+      /! /ko
+
