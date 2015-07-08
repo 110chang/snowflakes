@@ -14,6 +14,11 @@ html
   body
     h1.title
       | CSSnowflakes
+    p.counter data-bind="visible: inAction"
+      span.count data-bind="text: currentCount"
+      | /
+      span.count data-bind="text: totalCount"
+      | flakes
     == yield
     - if settings.development?
       script src="/js/all.js"

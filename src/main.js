@@ -46,7 +46,7 @@ var blurFxEnd = '0 0 20px #FFF';
 function animate($el) {
   var r = Math.floor(Math.random() * 60) - 30;
   var ro = Math.floor(Math.random() * 60) - 30;
-  var dur = Math.floor(Math.random() * 2000) + 3000;
+  var dur = Math.floor(Math.random() * 5000) + 5000;
   var offsetX = Math.floor(Math.random() * centerX) - centerX / 2;
   var offsetY = Math.floor(Math.random() * centerY) - centerY / 2;
   var fontSize = Math.floor(Math.random() * maxFontSize);
@@ -80,12 +80,13 @@ function animate($el) {
     'text-shadow': blurFxEnd,
     //'color': 'rgba(255,255,255,0)'
     //'opacity': 0
-  }, dur, 'easeOutQuad', function() {
+  }, dur, 'easeOutExpo', function() {
     $el.remove();
   });
 }
 
 function clear() {
+  count = 0;
   words = [];
   $('.snowflake').remove();
 }
@@ -93,6 +94,7 @@ function clear() {
 function loop() {
   if (!words[count]) {
     vm.inAction(false);
+    clear();
     return;
   }
   var $el = $('<span/>').text(words[count].surface);
@@ -104,6 +106,7 @@ function loop() {
   timer = setTimeout(function() {
 
     count++;
+    vm.currentCount(count);
     clearTimeout(timer);
     loop();
   }, timeout);
@@ -118,6 +121,8 @@ function onAPISuccess(xhr, status) {
   vm.apiSuccess(true);
   vm.apiLoading(false);
   vm.inAction(true);
+  vm.totalCount(words.length);
+  vm.currentCount(count);
   loop();
 }
 

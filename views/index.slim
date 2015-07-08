@@ -6,13 +6,15 @@ form.form-hide action="" method="POST"
   .form-inner
     label for="form-url"
       | URL
-    span.form-msg data-bind="visible: onceValidated"
+    /! ko if: !inAction()
+    span.form-msg data-bind="visible: onceValidated()"
       span.form-msg-err data-bind="ifnot: urlValid"
         | Invalid URL
       span.form-msg-err data-bind="ifnot: apiSuccess"
         | API Error
       span.form-msg-ok data-bind="if: urlValid() && apiSuccess()"
         | OK
+    /! /ko
     .form-submit-wrapper
       input#form-url type="text" name="url" placeholder="http://" data-bind="value: url, valueUpdate: 'afterkeydown', enable: !inAction()"
       /! ko if: !inAction() && !apiLoading()

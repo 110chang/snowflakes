@@ -23,6 +23,8 @@ function VM() {
   this.apiSuccess = ko.observable(true);
   this.inAction = ko.observable(false);
   this.apiLoading = ko.observable(false);
+  this.currentCount = ko.observable(0);
+  this.totalCount = ko.observable(0);
 
   ko.applyBindings(this);
 
