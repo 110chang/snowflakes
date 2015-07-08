@@ -14,17 +14,18 @@ form action="" method="POST"
       span.form-msg-ok data-bind="if: urlValid() && apiSuccess()"
         | OK
     .form-submit-wrapper
-      input#form-url type="text" name="url" placeholder="http://" data-bind="value: url, valueUpdate: 'afterkeydown'"
+      input#form-url type="text" name="url" placeholder="http://" data-bind="value: url, valueUpdate: 'afterkeydown', enable: !inAction()"
       /! ko if: !inAction() && !apiLoading()
-      button.form-submit type="submit" data-bind="enable: urlValid, visible: !inAction() && !apiLoading()"
+      button.form-button.form-submit type="submit" data-bind="enable: urlValid, visible: !inAction() && !apiLoading()"
         i.fa.fa-play
       /! /ko
       /! ko if: inAction() && !apiLoading()
-      a.form-stop href="javascript:void(0);" data-bind="visible: inAction && !apiLoading()"
+      a.form-button.form-stop href="javascript:void(0);" data-bind="visible: inAction && !apiLoading()"
+        /i.fa.fa-times
         i.fa.fa-stop
       /! /ko
       /! ko if: apiLoading
-      span.form-spinner
+      span.form-button.form-spinner
         i.fa.fa-circle-o-notch.fa-spin
       /! /ko
 

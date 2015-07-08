@@ -40,16 +40,8 @@ var vm;
 function shadow(size, opacity) {
   return '0 0 ' + size + 'px rgba(255,255,255,' + opacity + ')';
 }
-var s = '0 0 0 #FFF';
-var g = '0 0 20px #FFF';
-var blurFxStart = [shadow(10,0), shadow(12,0), shadow(14,0), shadow(16,0)].join();
-var blurFxEnd = [shadow(10,1), shadow(12,1), shadow(14,1), shadow(16,1)].join();
-
-//if ('ontouchstart' in window) {
-  blurFxStart = s;
-  blurFxEnd = g;
-//}
-console.log(blurFxStart);
+var blurFxStart = '0 0 0 #FFF';
+var blurFxEnd = '0 0 20px #FFF';
 
 function animate($el) {
   var r = Math.floor(Math.random() * 60) - 30;
@@ -80,8 +72,8 @@ function animate($el) {
     //'top': centerY,
     //'font-size': 12,
     'transform': {
-      'translateX': centerX + offsetX / 10,
-      'translateY': centerY + offsetY / 10,
+      'translateX': centerX + offsetX / 5,
+      'translateY': centerY + offsetY / 5,
       'rotate': r + ro,
       'scale': 1
     },

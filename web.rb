@@ -10,7 +10,7 @@ require 'net/https'
 api_base = 'http://jlp.yahooapis.jp/MAService/V1/parse?'
 app_id = 'dj0zaiZpPUFoaE04WmcyRW1NaSZzPWNvbnN1bWVyc2VjcmV0Jng9Njg-'
 
-set :bind, '0.0.0.0'
+#set :bind, '0.0.0.0'
 
 configure do
   Compass.configuration do |config|
@@ -68,6 +68,7 @@ get '/css/*.css' do
 end
 
 after do
-  cache_control :no_cache
+  #puts settings.development?
+  cache_control :no_cache if settings.development?
 end
 
