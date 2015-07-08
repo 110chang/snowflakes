@@ -61,15 +61,6 @@ post '/falling' do
   json @json
 end
 
-get '/js/all.js' do
-  if settings.development?
-    send_file File.join(settings.public_folder, '/js/all.js')
-  else
-    send_file File.join(settings.public_folder, '/js/all.min.js')
-  end
-  
-end
-
 get '/css/*.css' do
   content_type 'text/css', :charset => 'utf-8'
   filename = params[:splat].first
