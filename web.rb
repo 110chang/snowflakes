@@ -16,7 +16,7 @@ configure do
   Compass.configuration do |config|
     config.project_path = File.dirname(__FILE__)
     config.sass_dir = 'views'
-    config.output_style = :expanded
+    config.output_style = :compressed
     config.line_comments = false
   end
   set :sass, Compass.sass_engine_options
@@ -47,15 +47,15 @@ post '/falling' do
     results: 'ma,uniq',
     sentence: @body.inner_text,
   }.to_param
-  logger.info(@uri.host)
-  logger.info(@uri.port)
-  logger.info(@uri.path)
+  #logger.info(@uri.host)
+  #logger.info(@uri.port)
+  #logger.info(@uri.path)
 
   http = Net::HTTP.new(@uri.host, @uri.port)
   responce = http.post(@uri.path, @uri.query, {'Content-type'=>'application/x-www-form-urlencoded'})
   @json = Hash.from_xml(responce.body).to_json
   #@json = CGI.unescapeHTML(@json)
-  logger.info(@json.encoding);
+  #logger.info(@json.encoding);
   #@doc = @mec.page.search('body').remove('script')
   #slim :falling#, escape_html: true
   json @json
