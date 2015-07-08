@@ -69,6 +69,10 @@ end
 
 after do
   #puts settings.development?
-  cache_control :no_cache if settings.development?
+  if settings.development?
+    cache_control :no_cache
+  else
+    cache_control :public, :max_age => 1 * 24 * 60 * 60
+  end
 end
 
