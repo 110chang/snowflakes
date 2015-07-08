@@ -155,5 +155,7 @@ $(function() {
     console.log('clear');
     clear();
   });
+
+  $('form').removeClass('form-hide');
 });
 
